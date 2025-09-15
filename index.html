@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To DoList</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+    <script src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer onload="gisLoaded()"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Tasks</h1>
+        <div id="auth-container">
+            <div id="user-info" style="display: none;">
+                <span id="user-name"></span>
+                <button id="logout-button">Logout</button>
+            </div>
+            <a id="login-link" href="login.html"><button id="login-button">Login with Google</button></a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- new sidebar -->
+        <aside class="sidebar">
+            <button class="nav-button active" data-panel="tasksPanel">Tasks</button>
+            <button class="nav-button" data-panel="createPanel">Create Task</button>
+            <button class="nav-button" data-panel="settingsPanel">Settings</button>
+        </aside>
+
+        <!-- main area with panels -->
+        <main class="main-area">
+            <!-- Tasks Panel -->
+            <section id="tasksPanel" class="panel">
+                <div class="taskSection">
+                    <h2>Your Tasks</h2>
+                    <div class="task-filters">
+                        <label for="filter-select">Filter by Priority:</label>
+                        <select id="filter-select" class="filter-select">
+                            <option value="all">All Tasks</option>
+                            <option value="important">Important</option>
+                            <option value="normal">Normal</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+                    <div id="origin-warning" style="display:none;" class="origin-warning">Warning: Login origin differs from app origin. Use the same host (localhost or 127.0.0.1) for both pages.</div>
+
+                    <div class="task-grid">
+                        <!-- Task cards will go here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create Task Panel -->
+            <section id="createPanel" class="panel" style="display:none;">
+                <div class="taskSection">
+                    <h2>Create Task</h2>
+                    <div class="add-task">
+                        <input type="text" placeholder="Add a new task...">
+                        <input type="text" placeholder="Add a task description...">
+                        <input type="datetime-local" class="date-input">
+                        <select class="priority-select">
+                            <option value="important">Important</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <button>Add Task</button>
+                        <button type="button" class="calendar-sync-btn">Sync to Google Calendar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Panel -->
+            <section id="settingsPanel" class="panel" style="display:none;">
+                <div class="taskSection">
+                    <h2>Settings</h2>
+                    <div class="task-filters">
+                        <label>Saved Tasks Count:</label>
+                        <div id="saved-count" style="color:#fff;margin-top:8px;"></div>
+                    </div>
+                    <div class="task-filters">
+                        <label>Storage:</label>
+                        <button id="clear-tasks" style="padding:10px 14px;border-radius:8px;background:#e74c3c;border:none;color:#fff;cursor:pointer">Clear All Tasks</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
